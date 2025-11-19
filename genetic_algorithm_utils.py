@@ -249,7 +249,7 @@ def genetic_algorithm(population, fitness_values, X_train, y_train, clusters, om
     """
     遗传算法主函数
     """
-    generations = 100  # 最大迭代代数
+    generations = 200  # 最大迭代代数
     # set_random_seed(42)
 
     for generation in range(generations):
