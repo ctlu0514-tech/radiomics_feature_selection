@@ -85,17 +85,20 @@ def evaluate_model_performance(X, y, selected_indices):
     
     return avg_results
 
-def print_summary_table(all_results, all_selected_indices):
+def print_summary_table(all_results, all_selected_indices, execution_times=None):
     """
     (修改版)
-    打印最终的对比表格，加入训练集指标
+    打印最终的对比表格，加入训练集指标和运行时间。
     """
-    print("\n" + "#"*70)
+    if execution_times is None:
+        execution_times = {}
+
+    print("\n" + "#"*90)
     print("### 最终实验对比总结 ###")
-    print("#"*70)
+    print("#"*90)
     
-    # [修改] 增加 Train_AUC 和 Train_Acc 列
-    header = f"{'Method':<12} | {'K':<4} | {'AUC':<10} | {'Train_AUC':<10} | {'Accuracy':<10} | {'Train_Acc':<10} | {'Sensitivity':<11} | {'Specificity':<11} | {'F1-Macro':<10}"
+    # [修改] 增加 Time(s) 列
+    header = f"{'Method':<12} | {'K':<4} | {'Time(s)':<8} | {'AUC':<10} | {'Train_AUC':<10} | {'Accuracy':<10} | {'Train_Acc':<10} | {'Sensitivity':<11} | {'Specificity':<11} | {'F1-Macro':<10}"
     print(header)
     print("-" * len(header))
     
@@ -103,15 +106,17 @@ def print_summary_table(all_results, all_selected_indices):
     
     for method_name, metrics in sorted_methods:
         k = len(all_selected_indices.get(method_name, []))
+        time_taken = execution_times.get(method_name, 0.0) # 获取时间
         
-        # [修改] 打印新增的指标
+        # [修改] 打印时间列
         print(f"{method_name:<12} | {k:<4} | "
+              f"{time_taken:<8.2f} | "                   # <--- 新增：保留2位小数的时间
               f"{metrics.get('AUC', 0):<10.4f} | "
-              f"{metrics.get('Train_AUC', 0):<10.4f} | "        # <--- 新增
+              f"{metrics.get('Train_AUC', 0):<10.4f} | "       
               f"{metrics.get('Accuracy', 0):<10.4f} | "
-              f"{metrics.get('Train_Accuracy', 0):<10.4f} | "  # <--- 新增
+              f"{metrics.get('Train_Accuracy', 0):<10.4f} | "  
               f"{metrics.get('Sensitivity', 0):<11.4f} | "
               f"{metrics.get('Specificity', 0):<11.4f} | "
               f"{metrics.get('F1-Macro', 0):<10.4f}")
               
-    print("#"*70)
+    print("#"*90)
