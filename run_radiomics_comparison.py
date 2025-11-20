@@ -254,23 +254,23 @@ def run_analysis_on_dataset(X_scaled, X_df_filled, y, feature_names,
     print(f"    >>> CDGAFS 执行完毕，耗时: {elapsed:.2f} 秒") # [统一打印]
 
     # --- 2. mRMR ---
-    start_time = time.time()
-    all_selected_indices['mRMR'] = select_features_mrmr(X_df_filled.copy(), y, K_FEATURES)
-    elapsed = time.time() - start_time
-    execution_times['mRMR'] = elapsed
-    print(f"    >>> mRMR 执行完毕，耗时: {elapsed:.2f} 秒")
+    # start_time = time.time()
+    # all_selected_indices['mRMR'] = select_features_mrmr(X_df_filled.copy(), y, K_FEATURES)
+    # elapsed = time.time() - start_time
+    # execution_times['mRMR'] = elapsed
+    # print(f"    >>> mRMR 执行完毕，耗时: {elapsed:.2f} 秒")
 
     # --- 3. LASSO ---
-    start_time = time.time()
-    # 调用新的固定K函数
-    # all_selected_indices['LASSO-Fixed-K'] = select_features_lasso_fixed_k(X_scaled, y, K_FEATURES)
-    # 调用新的自动K函数，不传入 K_FEATURES
-    all_selected_indices['LASSO-CV'] = select_features_lasso_cv(X_scaled, y)
-    elapsed = time.time() - start_time
-    execution_times['LASSO'] = elapsed
-    print(f"    >>> LASSO 执行完毕，耗时: {elapsed:.2f} 秒")
+    # start_time = time.time()
+    # # 调用新的固定K函数
+    # # all_selected_indices['LASSO-Fixed-K'] = select_features_lasso_fixed_k(X_scaled, y, K_FEATURES)
+    # # 调用新的自动K函数，不传入 K_FEATURES
+    # all_selected_indices['LASSO-CV'] = select_features_lasso_cv(X_scaled, y)
+    # elapsed = time.time() - start_time
+    # execution_times['LASSO'] = elapsed
+    # print(f"    >>> LASSO 执行完毕，耗时: {elapsed:.2f} 秒")
     
-    # --- 4. RFE-Only ---
+    # # --- 4. RFE-Only ---
     start_time = time.time()
     all_selected_indices['RFE-Only'] = select_features_rfe_only(X_scaled, y, K_FEATURES)
     elapsed = time.time() - start_time
@@ -306,15 +306,14 @@ def main():
     PUBLIC_DATASET_DIR = '/data/qh_20T_share_file/lct/CT67/dataset' # 根据您的截图，这是包含 .gz 文件的目录
     # 【通用配置】radMLBench 公开数据集的标签列名都是 'Target'
     PUBLIC_LABEL_COL = 'Target'
-
-    K_FEATURES = 20 
-    GA_POPULATION_SIZE = 50 
-    GA_OMEGA = 0.5
-    THETA = 0.9
-
     # 【只需修改这里来更换数据集】
     # public_datasets 列表中的名称必须与您本地保存的 .gz 文件名（不含扩展名）一致。
-    public_datasets = ['Hunter2023'] # 'C4KC-KiTS', 'BraTS-2021'
+    public_datasets = ['UPENN-GBM'] # 'C4KC-KiTS', 'BraTS-2021'
+
+    K_FEATURES = 50
+    GA_POPULATION_SIZE = 10
+    GA_OMEGA = 0.5
+    THETA = 0.9
 
     print("#"*70)
     print(f"### 开始运行实验：本地数据 + 公开基准测试 (K={K_FEATURES}) ###")
