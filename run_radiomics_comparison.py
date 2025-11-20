@@ -254,21 +254,21 @@ def run_analysis_on_dataset(X_scaled, X_df_filled, y, feature_names,
     print(f"    >>> CDGAFS 执行完毕，耗时: {elapsed:.2f} 秒") # [统一打印]
 
     # --- 2. mRMR ---
-    # start_time = time.time()
-    # all_selected_indices['mRMR'] = select_features_mrmr(X_df_filled.copy(), y, K_FEATURES)
-    # elapsed = time.time() - start_time
-    # execution_times['mRMR'] = elapsed
-    # print(f"    >>> mRMR 执行完毕，耗时: {elapsed:.2f} 秒")
+    start_time = time.time()
+    all_selected_indices['mRMR'] = select_features_mrmr(X_df_filled.copy(), y, K_FEATURES)
+    elapsed = time.time() - start_time
+    execution_times['mRMR'] = elapsed
+    print(f"    >>> mRMR 执行完毕，耗时: {elapsed:.2f} 秒")
 
     # --- 3. LASSO ---
-    # start_time = time.time()
-    # # 调用新的固定K函数
-    # # all_selected_indices['LASSO-Fixed-K'] = select_features_lasso_fixed_k(X_scaled, y, K_FEATURES)
-    # # 调用新的自动K函数，不传入 K_FEATURES
-    # all_selected_indices['LASSO-CV'] = select_features_lasso_cv(X_scaled, y)
-    # elapsed = time.time() - start_time
-    # execution_times['LASSO'] = elapsed
-    # print(f"    >>> LASSO 执行完毕，耗时: {elapsed:.2f} 秒")
+    start_time = time.time()
+    # 调用新的固定K函数
+    # all_selected_indices['LASSO-Fixed-K'] = select_features_lasso_fixed_k(X_scaled, y, K_FEATURES)
+    # 调用新的自动K函数，不传入 K_FEATURES
+    all_selected_indices['LASSO-CV'] = select_features_lasso_cv(X_scaled, y)
+    elapsed = time.time() - start_time
+    execution_times['LASSO'] = elapsed
+    print(f"    >>> LASSO 执行完毕，耗时: {elapsed:.2f} 秒")
     
     # # --- 4. RFE-Only ---
     start_time = time.time()
