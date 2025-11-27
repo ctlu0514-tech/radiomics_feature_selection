@@ -245,17 +245,17 @@ def run_strict_analysis(X_raw, y_raw, feature_names_raw, K_FEATURES, params, dat
     )
     execution_times['CDGAFS'] = time.time() - start
 
-    # # 5.2 LASSO (可选 - 暂时注释)
-    # start = time.time()
-    # all_selected_indices['LASSO-CV'] = select_features_lasso_cv(X_train, y_train)
-    # execution_times['LASSO-CV'] = time.time() - start
+    # 5.2 LASSO (可选 - 暂时注释)
+    start = time.time()
+    all_selected_indices['LASSO-CV'] = select_features_lasso_cv(X_train, y_train)
+    execution_times['LASSO-CV'] = time.time() - start
     
     # # 5.3 mRMR (可选 - 暂时注释)
-    # start = time.time()
-    # all_selected_indices['mRMR'] = select_features_mrmr(
-    #     X_train, y_train, feature_names, K_FEATURES
-    # )
-    # execution_times['mRMR'] = time.time() - start
+    start = time.time()
+    all_selected_indices['mRMR'] = select_features_mrmr(
+        X_train, y_train, feature_names, K_FEATURES
+    )
+    execution_times['mRMR'] = time.time() - start
 
     # --- 6. 统一评估 & 打印结果 ---
     all_results = {}
@@ -297,15 +297,15 @@ def main():
         print(f"未找到文件: {LOCAL_CSV_PATH}")
 
     # 任务 2: 公开数据集 (可选 - 暂时注释)
-    # public_datasets = ['UPENN-GBM'] # 可添加更多
-    # for ds_name in public_datasets:
-    #     file_path = os.path.join(PUBLIC_DATASET_DIR, f"{ds_name}.gz")
-    #     if os.path.exists(file_path):
-    #         print(f"\n>>> [任务 2] 公开数据: {ds_name} <<<")
-    #         X_raw, y, feats = load_data_structure_only(file_path, 'Target')
-    #         run_strict_analysis(X_raw, y, feats, K_FEATURES, PARAMS, ds_name)
-    #     else:
-    #         print(f"跳过: 未找到文件 {file_path}")
+    public_datasets = ['UPENN-GBM'] # 可添加更多
+    for ds_name in public_datasets:
+        file_path = os.path.join(PUBLIC_DATASET_DIR, f"{ds_name}.gz")
+        if os.path.exists(file_path):
+            print(f"\n>>> [任务 2] 公开数据: {ds_name} <<<")
+            X_raw, y, feats = load_data_structure_only(file_path, 'Target')
+            run_strict_analysis(X_raw, y, feats, K_FEATURES, PARAMS, ds_name)
+        else:
+            print(f"跳过: 未找到文件 {file_path}")
 
 if __name__ == "__main__":
     main()
