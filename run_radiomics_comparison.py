@@ -280,7 +280,7 @@ def main():
     PUBLIC_DATASET_DIR = '/data/qh_20T_share_file/lct/CT67/dataset'
 
     # 原始参数
-    K_FEATURES = 1000
+    K_FEATURES = 200
     PARAMS = {
         'pop': 100,
         'omega': 0.5,
