@@ -86,7 +86,7 @@ def _process_chromosome(chromosome, X, y, similarity_matrix, sss):
     return fitness
 
 
-def calculate_fitness(chromosomes, X, y, similarity_matrix, n_jobs=-1):
+def calculate_fitness_old(chromosomes, X, y, similarity_matrix, n_jobs=-1):
     """
     参数：
     - chromosomes: 染色体列表 [n_chromosomes, n_features]
